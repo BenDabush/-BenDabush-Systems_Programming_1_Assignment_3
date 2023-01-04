@@ -13,24 +13,16 @@ int main()
     int different_letters = 0;
     char ch = 'a';
 
-    FILE *fp = fopen("input.txt","r");
-    FILE *start_file = fp;
-    if (fp == NULL)
-    {
-        return 0;
-    }
-
     get_line_file(buffer_line, fp);
     place_in_string = get_word_string(buffer_line, key_word, place_in_string);
     get_word_string(buffer_line, char_command, place_in_string);
 
     // printf("key word = %s\nchar command = %s\n", key_word, char_command);
 
-    ch = fgetc(fp);
+    scanf("%c", *(buffer_line + i));
 
     if (char_command[0] == 'a')
     {
-        different_letters = 0;
         while(ch!=EOF)
         {
             ch = get_line_file(buffer_line, fp);
@@ -62,27 +54,26 @@ int main()
             }
         }        
     }
-    fclose(fp);
+    // fclose(fp);
 }
 
 
 
-char get_line_file(char* buffer_line, FILE* fp)
+char get_line_file(char* buffer_line)
 {
     int i = 0;
-    char ch = fgetc(fp);
-    while((ch!='\n')&&(ch!='\r')&&(ch != EOF))
+    scanf("%c", *(buffer_line + i));
+    while((*(buffer_line+i)!='\n')&&(*(buffer_line+i)!='\r'))
     {
-        *(buffer_line + i) = ch;
         i++;
-        ch = fgetc(fp);
+        scanf("%c", *(buffer_line + i))
     }
-    if(ch=='\r')
+    if(*(buffer_line+i)=='\r')
     {
-        ch = fgetc(fp);
+        scanf("%c", *(buffer_line + i));
     }
     *(buffer_line + i) = '\0';
-    return ch;
+    return *(buffer_line + i);
 }
 
 int get_word_string(char* buffer_line, char* buffer_word, int place_in_string)
@@ -105,20 +96,18 @@ int get_word_string(char* buffer_line, char* buffer_word, int place_in_string)
     return i;
 }
 
-char get_word_file(FILE* fp, char* buffer_word)
+char get_word_file(char* buffer_word)
 {
     int i = 0;
     memset(buffer_word, '\0', WORD);
-    char ch = fgetc(fp);
+    scanf("%c", *(buffer_line + i));
 
-    while ((ch!=' ')&&(ch!='\t')&&(ch!='\r')&&(ch!='\n')&&(ch!=EOF))
-    {
-          
-        *(buffer_word+i) = ch;  
+    while ((*(buffer_line + i)!=' ')&&(*(buffer_line + i)!='\t')&&(*(buffer_line + i)!='\r')&&(*(buffer_line + i)!='\n'))
+    { 
         i++;
-        ch = fgetc(fp);
+        scanf("%c", *(buffer_line + i));
     }    
-    return ch;
+    return *(buffer_line + i);
 }
 
 
