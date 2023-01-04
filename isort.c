@@ -4,13 +4,11 @@
 int main()
 {
     char ch;
-    int i = 0;
     int j = 0;
     int number = 0;
     int arr[ARRAY];
 
     FILE *fp = fopen("input.txt","r");
-    FILE *start_file = fp;
     if (fp == NULL)
     {
         return 0;
@@ -49,9 +47,9 @@ int main()
 
 int shift_element(int* arr, int i)
 {
-    for(i; i>0; i--)
+    for(int j = i; j>0; j--)
     {
-        *(arr+i+1) = *(arr+i);
+        *(arr+j+1) = *(arr+j);
     }
     return 0;
 }

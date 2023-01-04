@@ -13,10 +13,10 @@ txtfind: txtfind.o
 	$(CC) $(CFLAGS) txtfind.o -o txtfind
 
 isort.o: isort.c isort.h
-	$(CC) $(CFLAGS) -c isort.c isort.h -o isort.o
+	$(CC) $(CFLAGS) -c isort.c
 
 txtfind.o: txtfind.c txtfind.h
-	$(CC) $(CFLAGS) -c txtfind.c txtfind.h -o txtfind.o
+	$(CC) $(CFLAGS) -c txtfind.c 
 
 
 .PHONY: clean all

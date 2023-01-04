@@ -14,7 +14,6 @@ int main()
     char ch = 'a';
 
     FILE *fp = fopen("input.txt","r");
-    FILE *start_file = fp;
     if (fp == NULL)
     {
         return 0;
