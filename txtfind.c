@@ -13,19 +13,19 @@ int main()
     int different_letters = 0;
     char ch = 'a';
 
-    get_line_file(buffer_line, fp);
+    get_line_file(buffer_line);
     place_in_string = get_word_string(buffer_line, key_word, place_in_string);
     get_word_string(buffer_line, char_command, place_in_string);
 
     // printf("key word = %s\nchar command = %s\n", key_word, char_command);
 
-    scanf("%c", *(buffer_line + i));
+    scanf("%c", &ch);
 
     if (char_command[0] == 'a')
     {
         while(ch!=EOF)
         {
-            ch = get_line_file(buffer_line, fp);
+            ch = get_line_file(buffer_line);
             // printf("buffer = %s\n", buffer_line);
             place_in_string = 0;
             while(place_in_string<=strlen(buffer_line))
@@ -47,7 +47,7 @@ int main()
         different_letters = 1;
         while(ch!=EOF)
         {
-            ch = get_word_file(fp, buffer_word);
+            ch = get_word_file(buffer_word);
             if(is_similar(key_word, buffer_word, different_letters))
             {
                 printf("%s\n", buffer_word);
@@ -62,15 +62,18 @@ int main()
 char get_line_file(char* buffer_line)
 {
     int i = 0;
-    scanf("%c", *(buffer_line + i));
-    while((*(buffer_line+i)!='\n')&&(*(buffer_line+i)!='\r'))
+    char ch;
+    scanf("%c", &ch);
+    while((ch!='\n')&&(ch!='\r'))
     {
         i++;
-        scanf("%c", *(buffer_line + i))
+        scanf("%c", &ch);
+        *(buffer_line+i) = ch;
     }
     if(*(buffer_line+i)=='\r')
     {
-        scanf("%c", *(buffer_line + i));
+        scanf("%c", &ch);
+        *(buffer_line+i) = ch;
     }
     *(buffer_line + i) = '\0';
     return *(buffer_line + i);
@@ -99,15 +102,18 @@ int get_word_string(char* buffer_line, char* buffer_word, int place_in_string)
 char get_word_file(char* buffer_word)
 {
     int i = 0;
+    char ch;
     memset(buffer_word, '\0', WORD);
-    scanf("%c", *(buffer_line + i));
+    scanf("%c", &ch);
+    *(buffer_word + i) = ch;
 
-    while ((*(buffer_line + i)!=' ')&&(*(buffer_line + i)!='\t')&&(*(buffer_line + i)!='\r')&&(*(buffer_line + i)!='\n'))
+    while ((*(buffer_word + i)!=' ')&&(*(buffer_word + i)!='\t')&&(*(buffer_word + i)!='\r')&&(*(buffer_word + i)!='\n'))
     { 
         i++;
-        scanf("%c", *(buffer_line + i));
+        scanf("%c", &ch);
+        *(buffer_word + i) = ch;
     }    
-    return *(buffer_line + i);
+    return ch;
 }
 
 
