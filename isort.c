@@ -3,30 +3,14 @@
 
 int main()
 {
-    char ch;
-    int j = 0;
-    int number = 0;
     int arr[ARRAY];
-
-    FILE *fp = fopen("input.txt","r");
-    if (fp == NULL)
+    int num=0;
+    for (int i = 0; i <ARRAY ; i++)
     {
-        return 0;
+        scanf("%d",&num);
+        *(arr+i)=num;
     }
-
-    ch = fgetc(fp);
-    while(ch!=EOF)
-    {
-        while((48 <= ch)&&(ch <=57))
-        {
-            number = number*10+(ch-48);
-            ch = fgetc(fp);
-        }
-        *(arr+j) = number;
-        number = 0;
-        j++;
-        ch = fgetc(fp);
-    }
+    
 
     insertion_sort(arr , ARRAY);
     for(int i = 0; i<ARRAY; i++)
@@ -41,7 +25,7 @@ int main()
         }
         
     }
-    fclose(fp);
+    // fclose(fp);
     return 0;
 }
 
